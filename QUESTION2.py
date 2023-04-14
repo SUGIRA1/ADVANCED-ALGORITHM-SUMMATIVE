@@ -1,21 +1,12 @@
-#!/bin/python3
-
-import math
-import os
-import random
-import re
-import sys
-
-#
-# Complete the 'staircase' function below.
-#
-# The function accepts INTEGER n as parameter.
-#
-
 def staircase(n):
-    # Write your code here
+    for i in range(1, n + 1):
+        spaces = " " * (n - i)
+        hashes = "#" * i
+        combined = spaces + hashes
+        print(combined)
 
-if _name_ == '_main_':
-    n = int(input().strip())
+# Test case 1
+staircase(6)
 
-    staircase(n
+# Test case 2
+staircase(10)
