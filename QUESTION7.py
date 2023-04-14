@@ -1,13 +1,18 @@
-def countcoinswithsamesum(coins, n, sum):
+def coin_change(coins, target_sum):
+    num_coins = len(coins)
+    dp = [[0 for _ in range(target_sum + 1)] for _ in range(num_coins + 1)]
+    for i in range(num_coins + 1):
+        dp[i][0] = 1
+    for i in range(1, num_coins + 1):
+        for j in range(1, target_sum + 1):
+            if coins[i - 1] > j:
+                dp[i][j] = dp[i - 1][j]
+            else:
+                dp[i][j] = dp[i - 1][j] + dp[i][j - coins[i - 1]]
+    return dp[num_coins][target_sum]
 
-	if (sum == 0):
-		return 1
-	if (sum < 0):
-		return 0
-	if (n <= 0):
-		return 0
-	return countcoinswithsamesum(coins, n - 1, sum) + countcoinswithsamesum(coins, n, sum-coins[n-1])
-# Driver program to test above function
-coins = [2, 5, 3, 6]
-n = len(coins)
-print(countcoinswithsamesum(coins, n, 10))
+# Test case
+coins = [1, 2, 5]
+target_sum = 5
+ways = coin_change(coins, target_sum)
+print("Number of ways to make the target sum:", ways)
